@@ -1,0 +1,30 @@
+1. Распаковать
+
+
+2. Cd C:\Apache24\bin 
+   httpd.exe -k install
+
+
+3. C:\Program Files\Apache24\conf\httpd.conf
+
+   Define SRVROOT "c:/Program Files/Apache24" // Путь к папке апача
+
+
+4. Установка OpenSSL
+
+
+5. Cd C:\Apache24
+   mkdir certs
+   cd certs
+
+   После чего требуется ввести команду генерации сертификата, где вместо <SERVER> нужно подставить имя компьютера, на котором планируется размещен Apache:
+
+   openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout <SERVER>.key -out <SERVER>.crt
+
+   https://its.1c.ru/db/content/metod8dev/src/developers/scalability/instructions/i8105978.files/https_026.png?_=00007B2735B271C7-v2
+
+
+6. C:\Apache24\conf\extra\httpd-ssl.conf
+
+   SSLCertificateFile "${SRVROOT}/certs/<SERVER>.crt"
+   SSLCertificateKeyFile "${SRVROOT}/certs/<SERVER>.key"
